@@ -23,4 +23,6 @@ public class Athlete extends Participant {
     public int getAbility() {
         return ability;
     }
+
+
 }

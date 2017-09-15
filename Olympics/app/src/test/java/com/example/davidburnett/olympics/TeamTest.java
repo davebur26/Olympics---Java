@@ -36,4 +36,15 @@ public class TeamTest {
         assertSame(Country.ENGLAND, team1.getAthletes().get(0).getCountry());
     }
 
+    @Test
+    public void testTeamMedalCountCanUpdate(){
+        team1.setGoldCount();
+        team1.setSilverCount();
+        team1.setBronzeCount();
+
+        assertEquals(1,team1.getGoldCount());
+        assertEquals(1,team1.getSilverCount());
+        assertEquals(1,team1.getBronzeCount());
+    }
+
 }

@@ -30,4 +30,15 @@ public class AthleteTest {
         assertEquals(0, athlete1.getBronzeCount());
     }
 
+    @Test
+    public void testTeamMedalCountCanUpdate(){
+        athlete1.setGoldCount();
+        athlete1.setSilverCount();
+        athlete1.setBronzeCount();
+
+        assertEquals(1,athlete1.getGoldCount());
+        assertEquals(1,athlete1.getSilverCount());
+        assertEquals(1,athlete1 .getBronzeCount());
+    }
+
 }
