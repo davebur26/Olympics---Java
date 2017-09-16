@@ -13,15 +13,16 @@ import java.util.HashMap;
 public class Event {
 
     private ArrayList<Participant>entryList;
-    private ArrayList<Integer> winningScores;
     private ArrayList<Participant> medalWinners;
     private EventName name;
+    private int maxEntryLimit;
 
 
 
-    public Event(EventName name){
+    public Event(EventName name, int maxEntryLimit){
         entryList = new ArrayList<>();
         this.name = name;
+        this.maxEntryLimit = maxEntryLimit;
         medalWinners = new ArrayList<>();
 
     }
@@ -35,22 +36,25 @@ public class Event {
         return name;
     }
 
+    public int getMaxEntryLimit() {
+        return maxEntryLimit;
+    }
+
     public Participant getMedalWinner(Medal medal) {
         return medalWinners.get(medal.getIndex());
     }
 
-    public void addAthletes(Participant participant){
-        entryList.add(participant);
+    public void addParticipants(Participant participant) {
+        if (entryList.size() < maxEntryLimit) {
+            entryList.add(participant);
+        }
     }
-
-
 
     public void assignMedals(){
 
-        medalWinners.get(0).setGoldCount();
-        medalWinners.get(1).setSilverCount();
-        medalWinners.get(2).setBronzeCount();
-
+        medalWinners.get(Medal.GOLD.getIndex()).setGoldCount();
+        medalWinners.get(Medal.SILVER.getIndex()).setSilverCount();
+        medalWinners.get(Medal.BRONZE.getIndex()).setBronzeCount();
     }
 
     public void resultProcessing(Medal medal){
@@ -72,7 +76,6 @@ public class Event {
         medalWinners.add(null);
         medalWinners.add(null);
 
-
         resultProcessing(Medal.GOLD);
         resultProcessing(Medal.SILVER);
         resultProcessing(Medal.BRONZE);
@@ -80,4 +83,10 @@ public class Event {
         assignMedals();
 
     }
+
+
+
+
+
+
 }

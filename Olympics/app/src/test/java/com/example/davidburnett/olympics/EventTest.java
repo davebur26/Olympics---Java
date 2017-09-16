@@ -26,10 +26,10 @@ public class EventTest {
 
     @Before
     public void before(){
-        run = new Event(EventName.RUNNING);
+        run = new Event(EventName.RUNNING, 6);
         team1 = new Team(Country.ENGLAND, EventName.RUNNING);
-        athlete1 = new Athlete("Mo Farah", 80, Country.ENGLAND, EventName.RUNNING);
-        athlete2 = new Athlete("Dwayne Chambers", 80, Country.ENGLAND, EventName.RUNNING);
+        athlete1 = new Athlete("Mo Farah", 100, Country.ENGLAND, EventName.RUNNING);
+        athlete2 = new Athlete("Dwayne Chambers", 60, Country.ENGLAND, EventName.RUNNING);
         team1.addAthletesToTeam(athlete1);
         team1.addAthletesToTeam(athlete2);
         team1.assignAbilityToTeam();
@@ -55,18 +55,34 @@ public class EventTest {
         team4.addAthletesToTeam(athlete8);
         team4.assignAbilityToTeam();
 
-        run.addAthletes(team1);
-        run.addAthletes(team2);
-        run.addAthletes(team3);
-        run.addAthletes(team4);
+        run.addParticipants(team1);
+        run.addParticipants(team2);
+        run.addParticipants(team3);
+        run.addParticipants(team4);
 
 
     }
 
     @Test
     public void eventDetails(){
+
+        athlete1.addParticipantToOlympicsRegistration();
+        athlete2.addParticipantToOlympicsRegistration();
         assertEquals(4, run.getEntryList().size());
         assertEquals(EventName.RUNNING, run.getName());
+        assertEquals(2, Participant.getAllParticipants().size());
+    }
+
+    @Test
+    public void checkEventCannotHaveTooManyParticipants(){
+        run.addParticipants(athlete1);
+        run.addParticipants(athlete2);
+        run.addParticipants(athlete3);
+        run.addParticipants(athlete4);
+        run.addParticipants(athlete5);
+        run.addParticipants(athlete6);
+        run.addParticipants(athlete7);
+        assertEquals(6, run.getMaxEntryLimit());
 
     }
 

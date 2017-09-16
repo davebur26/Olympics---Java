@@ -1,5 +1,7 @@
 package com.example.davidburnett.olympics;
 
+import java.util.ArrayList;
+
 /**
  * Created by davidburnett on 15/09/2017.
  */
@@ -12,6 +14,7 @@ public abstract class Participant {
     private int goldCount;
     private int silverCount;
     private int bronzeCount;
+    private static ArrayList<Participant>allParticipants;
 
     public Participant(Country country, EventName enteredEvent){
         this.country = country;
@@ -19,7 +22,13 @@ public abstract class Participant {
         goldCount = 0;
         silverCount = 0;
         bronzeCount = 0;
+        allParticipants = new ArrayList<>();
+
+
+
     }
+
+
 
     public Country getCountry() {
         return country;
@@ -41,6 +50,10 @@ public abstract class Participant {
         return bronzeCount;
     }
 
+    public static ArrayList<Participant> getAllParticipants() {
+        return allParticipants;
+    }
+
     public void setGoldCount() {
         this.goldCount ++;
     }
@@ -54,5 +67,10 @@ public abstract class Participant {
     }
 
     public abstract int getAbility();
+
+    public void addParticipantToOlympicsRegistration(){
+        allParticipants.add(this);
+
+    }
 
 }
