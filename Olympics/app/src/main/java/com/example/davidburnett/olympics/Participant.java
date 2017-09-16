@@ -54,4 +54,5 @@ public abstract class Participant {
     }
 
     public abstract int getAbility();
+
 }

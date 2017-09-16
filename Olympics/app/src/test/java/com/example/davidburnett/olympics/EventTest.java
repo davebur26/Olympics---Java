@@ -33,11 +33,12 @@ public class EventTest {
         team1.addAthletesToTeam(athlete1);
         team1.addAthletesToTeam(athlete2);
         team1.assignAbilityToTeam();
-        team2 = new Team(Country.ENGLAND, EventName.RUNNING);
+
+        team2 = new Team(Country.SCOTLAND, EventName.RUNNING);
         athlete3 = new Athlete("Laura Muir", 90, Country.SCOTLAND, EventName.RUNNING);
         athlete4 = new Athlete("Eilish McColgan", 90, Country.SCOTLAND, EventName.RUNNING);
-        team2.addAthletesToTeam(athlete1);
-        team2.addAthletesToTeam(athlete2);
+        team2.addAthletesToTeam(athlete3);
+        team2.addAthletesToTeam(athlete4);
         team2.assignAbilityToTeam();
 
         team3 = new Team(Country.IRELAND, EventName.RUNNING);
@@ -72,11 +73,11 @@ public class EventTest {
     @Test
     public void testWinner(){
         run.getWinner();
-        run.assignMedals();
 
-        assertEquals(team2,run.getGoldWinner());
-        assertEquals(team1,run.getSilverWinner());
-        assertEquals(team3,run.getBronzeWinner());
+        assertEquals(team2,run.getMedalWinner(Medal.GOLD));
+        assertEquals(team1,run.getMedalWinner(Medal.SILVER));
+        assertEquals(team3,run.getMedalWinner(Medal.BRONZE));
+
     }
 
 }

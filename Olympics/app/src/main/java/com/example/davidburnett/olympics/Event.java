@@ -4,6 +4,7 @@ import android.icu.text.MessagePattern;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by davidburnett on 15/09/2017.
@@ -12,20 +13,19 @@ import java.util.Arrays;
 public class Event {
 
     private ArrayList<Participant>entryList;
+    private ArrayList<Integer> winningScores;
+    private ArrayList<Participant> medalWinners;
     private EventName name;
-    private Participant goldWinner;
-    private Participant silverWinner;
-    private Participant bronzeWinner;
+
 
 
     public Event(EventName name){
         entryList = new ArrayList<>();
         this.name = name;
-        goldWinner = null;
-        silverWinner = null;
-        bronzeWinner = null;
+        medalWinners = new ArrayList<>();
 
     }
+
 
     public ArrayList<Participant> getEntryList() {
         return entryList;
@@ -35,61 +35,49 @@ public class Event {
         return name;
     }
 
-    public Participant getGoldWinner() {
-        return goldWinner;
-    }
-
-    public Participant getSilverWinner() {
-        return silverWinner;
-    }
-
-    public Participant getBronzeWinner() {
-        return bronzeWinner;
+    public Participant getMedalWinner(Medal medal) {
+        return medalWinners.get(medal.getIndex());
     }
 
     public void addAthletes(Participant participant){
         entryList.add(participant);
     }
 
-    public void getWinner(){
 
-        ArrayList<Integer>medalScores = new ArrayList<>();
-        ArrayList<Participant>medalWinners = new ArrayList<>();
-        medalScores.add(0);
-        medalScores.add(0);
-        medalScores.add(0);
 
-        for(Participant participant: entryList){
-            if (medalScores.get(0) < participant.getAbility()) {
-                medalScores.add(0, participant.getAbility());
-                medalWinners.add(0, participant);
+    public void assignMedals(){
 
-            }else if (medalScores.get(1) < participant.getAbility()){
-                medalScores.add(1, participant.getAbility());
-                medalWinners.add(1, participant);
-
-            }else if (medalScores.get(2) < participant.getAbility()){
-                medalScores.add(2, participant.getAbility());
-                medalWinners.add(2, participant);
-            }
-        }
-        goldWinner = medalWinners.get(0);
-        silverWinner = medalWinners.get(1);
-        bronzeWinner = medalWinners.get(2);
-
-        System.out.println(medalWinners.get(0).getGoldCount());
-        System.out.println(medalWinners.get(1).getSilverCount());
-        System.out.println(medalWinners.get(2).getBronzeCount());
-        System.out.println(medalScores.get(0));
-        System.out.println(medalScores.get(1));
-        System.out.println(medalScores.get(2));
+        medalWinners.get(0).setGoldCount();
+        medalWinners.get(1).setSilverCount();
+        medalWinners.get(2).setBronzeCount();
 
     }
 
-    public void assignMedals(){
-        goldWinner.setGoldCount();
-        silverWinner.setSilverCount();
-        bronzeWinner.setBronzeCount();
+    public void resultProcessing(Medal medal){
+        int medalScores = 0;
+
+        for(Participant participant: entryList) {
+            if ((medalScores < participant.getAbility()) && (!medalWinners.contains(participant))) {
+                medalScores = (participant.getAbility());
+                medalWinners.set(medal.getIndex(), participant);
+            }
+        }
+    }
+
+
+    public void getWinner(){
+
+//      Is there a way without having to do this?
+        medalWinners.add(null);
+        medalWinners.add(null);
+        medalWinners.add(null);
+
+
+        resultProcessing(Medal.GOLD);
+        resultProcessing(Medal.SILVER);
+        resultProcessing(Medal.BRONZE);
+
+        assignMedals();
 
     }
 }
