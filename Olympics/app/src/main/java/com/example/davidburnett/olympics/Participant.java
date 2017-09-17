@@ -15,6 +15,7 @@ public abstract class Participant {
     private int silverCount;
     private int bronzeCount;
     private static ArrayList<Participant>allParticipants;
+    private Olympics olympics;
 
     public Participant(Country country, EventName enteredEvent){
         this.country = country;
@@ -23,6 +24,9 @@ public abstract class Participant {
         silverCount = 0;
         bronzeCount = 0;
         allParticipants = new ArrayList<>();
+//      Can I call addParticipantToOlympicsRegistration() here?
+//        addParticipantToOlympicsRegistration();
+
 
 
 
@@ -48,6 +52,12 @@ public abstract class Participant {
 
     public int getBronzeCount() {
         return bronzeCount;
+    }
+
+    public void setMedals(int goldCount, int silverCount, int bronzeCount) {
+        this.goldCount = goldCount;
+        this.silverCount = silverCount;
+        this.bronzeCount = bronzeCount;
     }
 
     public static ArrayList<Participant> getAllParticipants() {

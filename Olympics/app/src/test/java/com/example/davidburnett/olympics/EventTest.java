@@ -23,6 +23,7 @@ public class EventTest {
     Athlete athlete6;
     Athlete athlete7;
     Athlete athlete8;
+    Olympics london2012;
 
     @Before
     public void before(){
@@ -60,6 +61,12 @@ public class EventTest {
         run.addParticipants(team3);
         run.addParticipants(team4);
 
+        team1.addParticipantToOlympicsRegistration();
+        team2.addParticipantToOlympicsRegistration();
+        team3.addParticipantToOlympicsRegistration();
+        team4.addParticipantToOlympicsRegistration();
+        london2012 = new Olympics();
+
 
     }
 
@@ -68,6 +75,7 @@ public class EventTest {
 
         athlete1.addParticipantToOlympicsRegistration();
         athlete2.addParticipantToOlympicsRegistration();
+
         assertEquals(4, run.getEntryList().size());
         assertEquals(EventName.RUNNING, run.getName());
         assertEquals(2, Participant.getAllParticipants().size());
@@ -90,9 +98,20 @@ public class EventTest {
     public void testWinner(){
         run.getWinner();
 
+        team1.setMedals(0,0,0);
+        team2.setMedals(10,13,15);
+        team3.setMedals(10,13,16);
+        team4.setMedals(10,13,16);
+
+        london2012.createMedalTable();
+
         assertEquals(team2,run.getMedalWinner(Medal.GOLD));
         assertEquals(team1,run.getMedalWinner(Medal.SILVER));
         assertEquals(team3,run.getMedalWinner(Medal.BRONZE));
+        assertEquals(team4.getCountry(),london2012.getMedalTable().get(0).getCountry());
+        assertEquals(team3.getCountry(),london2012.getMedalTable().get(1).getCountry());
+        assertEquals(team2.getCountry(),london2012.getMedalTable().get(2).getCountry());
+        assertEquals(team1.getCountry(),london2012.getMedalTable().get(3).getCountry());
 
     }
 

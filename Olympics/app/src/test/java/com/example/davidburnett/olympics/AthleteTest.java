@@ -41,4 +41,11 @@ public class AthleteTest {
         assertEquals(1,athlete1 .getBronzeCount());
     }
 
+    @Test
+    public void testGetAllAthletes(){
+        athlete1.addParticipantToOlympicsRegistration();
+        athlete2.addParticipantToOlympicsRegistration();
+
+    }
+
 }
