@@ -65,6 +65,7 @@ public class EventTest {
         team2.addParticipantToOlympicsRegistration();
         team3.addParticipantToOlympicsRegistration();
         team4.addParticipantToOlympicsRegistration();
+        athlete1.addParticipantToOlympicsRegistration();
         london2012 = new Olympics();
 
 
@@ -72,13 +73,8 @@ public class EventTest {
 
     @Test
     public void eventDetails(){
-
-        athlete1.addParticipantToOlympicsRegistration();
-        athlete2.addParticipantToOlympicsRegistration();
-
         assertEquals(4, run.getEntryList().size());
         assertEquals(EventName.RUNNING, run.getName());
-        assertEquals(2, Participant.getAllParticipants().size());
     }
 
     @Test
@@ -98,20 +94,22 @@ public class EventTest {
     public void testWinner(){
         run.getWinner();
 
-        team1.setMedals(0,0,0);
-        team2.setMedals(10,13,15);
-        team3.setMedals(10,13,16);
-        team4.setMedals(10,13,16);
+        team1.setMedals(9,9,0);
+        team2.setMedals(10,13,16);
+        team3.setMedals(8,13,16);
+        team4.setMedals(10,13,15);
+        athlete1.setMedals(9,0,0);
 
         london2012.createMedalTable();
 
         assertEquals(team2,run.getMedalWinner(Medal.GOLD));
         assertEquals(team1,run.getMedalWinner(Medal.SILVER));
         assertEquals(team3,run.getMedalWinner(Medal.BRONZE));
-        assertEquals(team4.getCountry(),london2012.getMedalTable().get(0).getCountry());
-        assertEquals(team3.getCountry(),london2012.getMedalTable().get(1).getCountry());
-        assertEquals(team2.getCountry(),london2012.getMedalTable().get(2).getCountry());
-        assertEquals(team1.getCountry(),london2012.getMedalTable().get(3).getCountry());
+        assertEquals(team4.getCountry(),london2012.getMedalTable().get(1).getCountry());
+        assertEquals(team3.getCountry(),london2012.getMedalTable().get(4).getCountry());
+        assertEquals(team2.getCountry(),london2012.getMedalTable().get(0).getCountry());
+        assertEquals(team1.getCountry(),london2012.getMedalTable().get(2).getCountry());
+        assertEquals(athlete1,london2012.getMedalTable().get(3));
 
     }
 

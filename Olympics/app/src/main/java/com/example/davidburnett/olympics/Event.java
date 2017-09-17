@@ -45,7 +45,7 @@ public class Event {
     }
 
     public void addParticipants(Participant participant) {
-        if (entryList.size() < maxEntryLimit) {
+        if ((entryList.size() < maxEntryLimit) && (participant.getEnteredEvent() == this.name)){
             entryList.add(participant);
         }
     }

@@ -27,6 +27,8 @@ public class Olympics {
         return allParticipants;
     }
 
+//    This doesnt do country, only participant
+
     public void createMedalTable() {
         generateMedalArrays();
         for( int i = 0; i < medalCounter.size(); i++){
@@ -35,20 +37,29 @@ public class Olympics {
 
                     if (participant.getGoldCount() > medalCounter.get(i)) {
                         medalTable.set(i, participant);
+                        medalCounter.set(i, participant.getGoldCount());
 
-                    }else if(participant.getGoldCount() == medalTable.get(i).getGoldCount()){
-                        if (participant.getSilverCount() > medalTable.get(i).getSilverCount()){
-                        medalTable.set(i, participant);
 
-                        }else if(participant.getSilverCount() == medalTable.get(i).getSilverCount()){
-                            if (participant.getBronzeCount() >= medalTable.get(i).getBronzeCount()){
+                    }else if(participant.getGoldCount() == medalTable.get(i).getGoldCount()) {
+                        if (participant.getSilverCount() > medalTable.get(i).getSilverCount()) {
                             medalTable.set(i, participant);
+                            medalCounter.set(i, participant.getGoldCount());
 
-                            }else if(medalTable.get(i).getCountry() == null){
+
+                        } else if (participant.getSilverCount() == medalTable.get(i).getSilverCount()) {
+                            if (participant.getBronzeCount() >= medalTable.get(i).getBronzeCount()) {
                                 medalTable.set(i, participant);
+                                medalCounter.set(i, participant.getGoldCount());
+
+
+                            } else if (medalTable.get(i).getCountry() == null) {
+                                medalTable.set(i, participant);
+                                medalCounter.set(i, participant.getGoldCount());
+
                             }
                         }
                     }
+
                 }
             }
         }
@@ -62,6 +73,8 @@ public class Olympics {
             medalTable.add(fakeParticipant);
         }
     }
+
+//    create a country class which calculates all the medals london2012.getMedals(Gb) ???
 
 
 }
